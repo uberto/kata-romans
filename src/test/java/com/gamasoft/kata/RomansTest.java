@@ -14,25 +14,28 @@ public class RomansTest {
 
     @Test
     public void twoIsII() {
-        assertThat(romanOnes(2), is("II"));
+        assertThat(romanFour(2), is("II"));
     }
 
     @Test
     public void threeIsIII() {
-        assertThat(romanOnes(3), is("III"));
+        assertThat(romanFour(3), is("III"));
     }
 
     @Test
     public void fourIsIV() {
 
-        int number = 4;
+        assertThat(romanFour(4), is("IV"));
+    }
+
+    private String romanFour(int number) {
         String roman = "";
         if (number == 4) {
             roman = romanOnes(1) + "V";
         } else {
             roman = romanOnes(number);
         }
-        assertThat(roman, is("IV"));
+        return roman;
     }
 
     private String romanOnes(int number) {
