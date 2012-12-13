@@ -74,6 +74,12 @@ public class RomansTest {
         assertThat(romanCalculator(12), is("XII"));
     }
 
+    @Test
+    public void fourteenIsXIV() {
+
+        assertThat(romanCalculator(14), is("XIV"));
+    }
+
     private String romanCalculator(int number) {
         return romanAroundTen(number);
     }
