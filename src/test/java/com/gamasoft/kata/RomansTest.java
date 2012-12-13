@@ -31,7 +31,14 @@ public class RomansTest {
     @Test
     public void fiveIsV() {
 
-        String actual = romanFour(5);
+        int number = 5;
+
+        String actual;
+        if (number < 5) {
+            actual = romanFour(number);
+        } else {
+            actual = "V" + romanOnes(number - 5);
+        }
         assertThat(actual, is("V"));
     }
 
