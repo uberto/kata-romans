@@ -13,63 +13,82 @@ public class RomansTest {
 
     @Test
     public void oneIsI() {
-        assertThat(romanFives(1), is("I"));
+        assertThat(romanCalculator(1), is("I"));
     }
 
     @Test
     public void twoIsII() {
-        assertThat(romanFives(2), is("II"));
+        assertThat(romanCalculator(2), is("II"));
     }
 
     @Test
     public void threeIsIII() {
-        assertThat(romanFives(3), is("III"));
+        assertThat(romanCalculator(3), is("III"));
     }
 
     @Test
     public void fourIsIV() {
 
-        assertThat(romanFives(4), is("IV"));
+        assertThat(romanCalculator(4), is("IV"));
     }
 
     @Test
     public void fiveIsV() {
 
-        assertThat(romanFives(5), is("V"));
+        assertThat(romanCalculator(5), is("V"));
     }
 
     @Test
     public void sixIsVI() {
 
-        assertThat(romanFives(6), is("VI"));
+        assertThat(romanCalculator(6), is("VI"));
     }
 
     @Test
     public void sevenIsVII() {
 
-        assertThat(romanFives(7), is("VII"));
+        assertThat(romanCalculator(7), is("VII"));
     }
 
     @Test
     public void eightIsVIII() {
 
-        assertThat(romanFives(8), is("VIII"));
+        assertThat(romanCalculator(8), is("VIII"));
     }
 
     @Test
     public void nineIsIX() {
 
-        int number = 9;
+        assertThat(romanCalculator(9), is("IX"));
+    }
+
+    @Test
+    public void tenIsX() {
+
+        assertThat(romanCalculator(10), is("X"));
+    }
+
+    @Test
+    public void twelveIsXII() {
+
+        assertThat(romanCalculator(12), is("XII"));
+    }
+
+    private String romanCalculator(int number) {
+        return romanAroundTen(number);
+    }
+
+    private String romanAroundTen(int number) {
         String actual;
         if (number < 9) {
-            actual = romanFives(number);
+            actual = romanAroundFive(number);
         } else {
             actual =  romanOnes(10 - number) + ROMAN_TEN + romanOnes(number - 10);
         }
-        assertThat(actual, is("IX"));
+        return actual;
     }
 
-    private String romanFives(int number) {
+    private String romanAroundFive(int number) {
         if (number < 4) {
             return romanOnes(number);
         } else {
