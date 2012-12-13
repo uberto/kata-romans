@@ -22,6 +22,11 @@ public class RomansTest {
         assertThat(romanOnes(3), is("III"));
     }
 
+    @Test
+    public void fourIsIV(){
+        assertThat(romanOnes(4), is("III"));
+    }
+
     private String romanOnes(int number) {
         String two = "";
         for (int i = 0; i < number; i++) {
