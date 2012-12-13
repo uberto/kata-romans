@@ -33,13 +33,20 @@ public class RomansTest {
 
         int number = 5;
 
-        String actual;
-        if (number < 5) {
-            actual = romanFour(number);
-        } else {
-            actual = "V" + romanOnes(number - 5);
-        }
+        String actual = romanFives(number);
         assertThat(actual, is("V"));
+    }
+
+    private String romanFives(int number) {
+        String actual;
+
+        if (number < 4) {
+            actual = romanOnes(number);
+        } else {
+            actual = romanOnes(5 - number) + "V" + romanOnes(number - 5);
+        }
+
+        return actual;
     }
 
     private String romanFour(int number) {
