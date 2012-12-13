@@ -9,50 +9,41 @@ public class RomansTest {
 
     @Test
     public void oneIsI() {
-        assertThat(romanOne(), is("I"));
+        assertThat(romanFives(1), is("I"));
     }
 
     @Test
     public void twoIsII() {
-        assertThat(romanFour(2), is("II"));
+        assertThat(romanFives(2), is("II"));
     }
 
     @Test
     public void threeIsIII() {
-        assertThat(romanFour(3), is("III"));
+        assertThat(romanFives(3), is("III"));
     }
 
     @Test
     public void fourIsIV() {
 
-        assertThat(romanFour(4), is("IV"));
+        assertThat(romanFives(4), is("IV"));
     }
 
     @Test
     public void fiveIsV() {
 
-        int number = 5;
-
-        String actual = romanFives(number);
-        assertThat(actual, is("V"));
+        assertThat(romanFives(5), is("V"));
     }
 
     private String romanFives(int number) {
         if (number < 4) {
             return romanOnes(number);
         } else {
-            return romanOnes(5 - number) + "V" + romanOnes(number - 5);
+            return romanOnes(5 - number) + romanFive() + romanOnes(number - 5);
         }
     }
 
-    private String romanFour(int number) {
-        String roman = "";
-        if (number == 4) {
-            roman = romanOnes(1) + "V";
-        } else {
-            roman = romanOnes(number);
-        }
-        return roman;
+    private String romanFive() {
+        return "V";
     }
 
     private String romanOnes(int number) {
