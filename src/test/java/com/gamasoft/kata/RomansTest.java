@@ -9,20 +9,28 @@ public class RomansTest {
 
     @Test
     public void oneIsI(){
-        assertThat(roman(1), is("I"));
+        assertThat(romanOne(), is("I"));
     }
 
     @Test
     public void twoIsII(){
-        String two = "";
-        int number = 2;
-        for (int i = 0; i < number; i++) {
-           two += roman(1);
-        }
-        assertThat(two, is("II"));
+        assertThat(romanOnes(2), is("II"));
     }
 
-    private String roman(int i) {
+    @Test
+    public void threeIsIII(){
+        assertThat(romanOnes(3), is("III"));
+    }
+
+    private String romanOnes(int number) {
+        String two = "";
+        for (int i = 0; i < number; i++) {
+           two += romanOne();
+        }
+        return two;
+    }
+
+    private String romanOne() {
         return "I";
     }
 }
