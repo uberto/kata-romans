@@ -97,11 +97,12 @@ public class RomansTest {
     }
 
     private String romanOnes(int number) {
-        String two = "";
+
+        StringBuilder sb = new StringBuilder("");
         for (int i = 0; i < number; i++) {
-            two += ROMAN_ONE;
+            sb.append( ROMAN_ONE);
         }
-        return two;
+        return sb.toString();
     }
 
 }
