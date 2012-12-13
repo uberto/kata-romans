@@ -38,15 +38,11 @@ public class RomansTest {
     }
 
     private String romanFives(int number) {
-        String actual;
-
         if (number < 4) {
-            actual = romanOnes(number);
+            return romanOnes(number);
         } else {
-            actual = romanOnes(5 - number) + "V" + romanOnes(number - 5);
+            return romanOnes(5 - number) + "V" + romanOnes(number - 5);
         }
-
-        return actual;
     }
 
     private String romanFour(int number) {
