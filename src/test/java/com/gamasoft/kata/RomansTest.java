@@ -28,6 +28,13 @@ public class RomansTest {
         assertThat(romanFour(4), is("IV"));
     }
 
+    @Test
+    public void fiveIsV() {
+
+        String actual = romanFour(5);
+        assertThat(actual, is("V"));
+    }
+
     private String romanFour(int number) {
         String roman = "";
         if (number == 4) {
