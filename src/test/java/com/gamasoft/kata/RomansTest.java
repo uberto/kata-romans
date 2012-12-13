@@ -9,6 +9,7 @@ public class RomansTest {
 
     public static final String ROMAN_FIVE = "V";
     public static final String ROMAN_ONE = "I";
+    private static final String ROMAN_TEN = "X";
 
     @Test
     public void oneIsI() {
@@ -58,7 +59,14 @@ public class RomansTest {
     @Test
     public void nineIsIX() {
 
-        assertThat(romanFives(9), is("IX"));
+        int number = 9;
+        String actual;
+        if (number < 9) {
+            actual = romanFives(number);
+        } else {
+            actual =  romanOnes(10 - number) + ROMAN_TEN + romanOnes(number - 10);
+        }
+        assertThat(actual, is("IX"));
     }
 
     private String romanFives(int number) {
