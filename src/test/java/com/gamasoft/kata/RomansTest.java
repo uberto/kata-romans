@@ -7,6 +7,9 @@ import static org.junit.Assert.assertThat;
 
 public class RomansTest {
 
+    public static final String ROMAN_FIVE = "V";
+    public static final String ROMAN_ONE = "I";
+
     @Test
     public void oneIsI() {
         assertThat(romanFives(1), is("I"));
@@ -62,23 +65,16 @@ public class RomansTest {
         if (number < 4) {
             return romanOnes(number);
         } else {
-            return romanOnes(5 - number) + romanFive() + romanOnes(number - 5);
+            return romanOnes(5 - number) + ROMAN_FIVE + romanOnes(number - 5);
         }
-    }
-
-    private String romanFive() {
-        return "V";
     }
 
     private String romanOnes(int number) {
         String two = "";
         for (int i = 0; i < number; i++) {
-            two += romanOne();
+            two += ROMAN_ONE;
         }
         return two;
     }
 
-    private String romanOne() {
-        return "I";
-    }
 }
