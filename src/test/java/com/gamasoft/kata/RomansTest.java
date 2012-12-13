@@ -9,10 +9,10 @@ public class RomansTest {
 
     @Test
     public void oneIsI(){
-        assertThat(roman(), is("I"));
+        assertThat(roman(1), is("I"));
     }
 
-    private String roman() {
+    private String roman(int i) {
         return "I";
     }
 }
