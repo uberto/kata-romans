@@ -34,6 +34,30 @@ public class RomansTest {
         assertThat(romanFives(5), is("V"));
     }
 
+    @Test
+    public void sixIsVI() {
+
+        assertThat(romanFives(6), is("VI"));
+    }
+
+    @Test
+    public void sevenIsVII() {
+
+        assertThat(romanFives(7), is("VII"));
+    }
+
+    @Test
+    public void eightIsVIII() {
+
+        assertThat(romanFives(8), is("VIII"));
+    }
+
+    @Test
+    public void nineIsIX() {
+
+        assertThat(romanFives(9), is("IX"));
+    }
+
     private String romanFives(int number) {
         if (number < 4) {
             return romanOnes(number);
