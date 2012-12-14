@@ -87,15 +87,7 @@ public class RomansTest {
     @Test
     public void nineteenIsXIX() {
 
-        String actual;
-        int number = 19;
-        if (number < 9) {
-            actual = romanAroundFive(number);
-        } else {
-            actual =  romanOnes(10 - number) + ROMAN_TEN + romanCalculator(number - 10);
-        }
-
-        assertThat(actual, is("XIX"));
+        assertThat(romanCalculator(19), is("XIX"));
     }
 
 
@@ -108,7 +100,7 @@ public class RomansTest {
         if (number < 9) {
             actual = romanAroundFive(number);
         } else {
-            actual =  romanOnes(10 - number) + ROMAN_TEN + romanAroundFive(number - 10);
+            actual =  romanOnes(10 - number) + ROMAN_TEN + romanCalculator(number - 10);
         }
         return actual;
     }
