@@ -90,6 +90,16 @@ public class RomansTest {
         assertThat(romanCalculator(19), is("XIX"));
     }
 
+    @Test
+    public void twentyNineIsXXIX() {
+        assertThat(romanCalculator(29), is("XXIX"));
+    }
+
+    @Test
+    public void thirtySixIsXXXVI() {
+        assertThat(romanCalculator(36), is("XXXVI"));
+    }
+
 
     private String romanCalculator(int number) {
         return romanAroundTen(number);
