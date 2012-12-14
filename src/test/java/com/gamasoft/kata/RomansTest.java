@@ -10,6 +10,7 @@ public class RomansTest {
     public static final String ROMAN_FIVE = "V";
     public static final String ROMAN_ONE = "I";
     private static final String ROMAN_TEN = "X";
+    private static final String ROMAN_FIFTY = "L";
 
     @Test
     public void oneIsI() {
@@ -102,7 +103,15 @@ public class RomansTest {
 
     @Test
     public void fortyIsXL() {
-        assertThat(romanCalculator(40), is("XL"));
+        String actual;
+        int number = 40;
+        if (number < 40) {
+            actual = romanCalculator(number);
+        } else {
+            actual =  ROMAN_TEN + ROMAN_FIFTY + romanCalculator(number - 40);
+        }
+
+        assertThat(actual, is("XL"));
     }
 
 
