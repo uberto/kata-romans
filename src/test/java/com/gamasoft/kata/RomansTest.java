@@ -103,20 +103,21 @@ public class RomansTest {
 
     @Test
     public void fortyIsXL() {
-        String actual;
-        int number = 40;
-        if (number < 40) {
-            actual = romanCalculator(number);
-        } else {
-            actual =  ROMAN_TEN + ROMAN_FIFTY + romanCalculator(number - 40);
-        }
-
-        assertThat(actual, is("XL"));
+        assertThat(romanCalculator(40), is("XL"));
     }
 
-
     private String romanCalculator(int number) {
-        return romanAroundTen(number);
+    return romanAroundFifty(number);
+    }
+
+    private String romanAroundFifty(int number) {
+        String actual;
+        if (number < 40) {
+            actual = romanAroundTen(number);
+        } else {
+            actual =  ROMAN_TEN + ROMAN_FIFTY + romanAroundTen(number - 40);
+        }
+        return actual;
     }
 
     private String romanAroundTen(int number) {
