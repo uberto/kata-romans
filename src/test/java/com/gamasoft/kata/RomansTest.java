@@ -108,11 +108,20 @@ public class RomansTest {
 
     @Test
     public void fiftyFourIsLIV() {
+
         assertThat(romanCalculator(54), is("LIV"));
     }
 
+    @Test
+    public void sixtyNineIsLXIX() {
+
+        assertThat(romanCalculator(69), is("LXIX"));
+    }
+
+
     private String romanCalculator(int number) {
-    return romanAroundFifty(number);
+
+        return romanAroundFifty(number);
     }
 
     private String romanAroundFifty(int number) {
@@ -120,7 +129,7 @@ public class RomansTest {
         if (number < 40) {
             actual = romanAroundTen(number);
         } else {
-            actual =  ROMAN_TEN + ROMAN_FIFTY + romanAroundTen(number - 40);
+            actual = (number < 50? ROMAN_TEN : "") + ROMAN_FIFTY + romanAroundTen(number - (number < 50? 40 : 50));
         }
         return actual;
     }
@@ -130,7 +139,7 @@ public class RomansTest {
         if (number < 9) {
             actual = romanAroundFive(number);
         } else {
-            actual =  romanOnes(10 - number) + ROMAN_TEN + romanCalculator(number - 10);
+            actual = romanOnes(10 - number) + ROMAN_TEN + romanCalculator(number - 10);
         }
         return actual;
     }
@@ -147,7 +156,7 @@ public class RomansTest {
 
         StringBuilder sb = new StringBuilder("");
         for (int i = 0; i < number; i++) {
-            sb.append( ROMAN_ONE);
+            sb.append(ROMAN_ONE);
         }
         return sb.toString();
     }
