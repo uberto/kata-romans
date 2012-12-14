@@ -106,6 +106,11 @@ public class RomansTest {
         assertThat(romanCalculator(40), is("XL"));
     }
 
+    @Test
+    public void fiftyFourIsLIV() {
+        assertThat(romanCalculator(54), is("LIV"));
+    }
+
     private String romanCalculator(int number) {
     return romanAroundFifty(number);
     }
