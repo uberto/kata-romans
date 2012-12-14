@@ -118,6 +118,11 @@ public class RomansTest {
         assertThat(romanCalculator(69), is("LXIX"));
     }
 
+    @Test
+    public void ninetyNineIsXCIX() {
+
+        assertThat(romanCalculator(99), is("XCIX"));
+    }
 
     private String romanCalculator(int number) {
 
