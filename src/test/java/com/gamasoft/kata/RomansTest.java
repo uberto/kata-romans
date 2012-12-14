@@ -77,8 +77,17 @@ public class RomansTest {
     @Test
     public void fourteenIsXIV() {
 
-        assertThat(romanCalculator(14), is("XIV"));
+        String actual;
+        int number = 14;
+        if (number < 9) {
+            actual = romanAroundFive(number);
+        } else {
+            actual =  romanOnes(10 - number) + ROMAN_TEN + romanCalculator(number - 10);
+        }
+
+        assertThat(actual, is("XIV"));
     }
+
 
     private String romanCalculator(int number) {
         return romanAroundTen(number);
