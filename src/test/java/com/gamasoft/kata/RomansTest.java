@@ -11,6 +11,7 @@ public class RomansTest {
     public static final String ROMAN_ONE = "I";
     private static final String ROMAN_TEN = "X";
     private static final String ROMAN_FIFTY = "L";
+    private static final String ROMAN_HUNDRED = "C";
 
     @Test
     public void oneIsI() {
@@ -120,9 +121,19 @@ public class RomansTest {
 
     @Test
     public void ninetyNineIsXCIX() {
+        String actual;
+        int number = 99;
+        if (number < 90) {
+            actual = romanAroundFifty(number);
+        } else {
+            actual = (number < 100? ROMAN_TEN : "") + ROMAN_HUNDRED + romanAroundFifty(number - (number < 100? 90 : 100));
+        }
 
-        assertThat(romanCalculator(99), is("XCIX"));
+        assertThat(actual, is("XCIX"));
     }
+
+
+
 
     private String romanCalculator(int number) {
 
