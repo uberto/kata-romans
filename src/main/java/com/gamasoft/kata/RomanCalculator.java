@@ -8,36 +8,33 @@ public class RomanCalculator {
     public static final RomanToken ROMAN_FIFTY = new RomanToken("L", 50, ROMAN_TEN, ROMAN_TEN);
     public static final RomanToken ROMAN_HUNDRED = new RomanToken("C", 100, ROMAN_FIFTY, ROMAN_TEN);
 
-    private static String romanComposition(RomanToken romanToken, int number) {
-        if (romanToken.getPrev() == null){
-            return romanToken.getRoman();
+
+    private static String composeRoman(RomanToken token, int number) {
+
+        RomanToken subtract = token.getSubtract();
+        if (token.getPrev() == null) {
+            return token.getRoman();
+        } else if (number < token.getValue() - subtract.getValue()) {
+            return composeRoman(token.getPrev(), number);
+        } else if (number < token.getValue()) {
+            return composeSubtractRoman(token, number, subtract);
         } else {
-            return romanNumber(romanToken, number);
+            return composeAdditionRoman(token, number);
         }
     }
 
-    private static String romanNumber(RomanToken romanToken, int number) {
-        int value = romanToken.getValue();
-        RomanToken subtract = romanToken.getSubtract();
-
-        if (number < value - subtract.getValue()) {
-            return romanComposition(romanToken.getPrev(), number);
-        } else {
-            String prefix = onlyIf(number < value, subtract.getRoman());
-            String postFix = romanComposition(romanToken, number - value + onlyIf(number < value, subtract.getValue()));
-            return prefix + romanToken.getRoman() + postFix;
-        }
+    private static String composeAdditionRoman(RomanToken token, int number) {
+        String postFix = composeRoman(token, number - token.getValue());
+        return token.getRoman() + postFix;
     }
 
-    private static int onlyIf(boolean condition, int value) {
-        return condition ? value : 0;
-    }
-
-    private static String onlyIf(boolean condition, String value) {
-        return condition ? value : "";
+    private static String composeSubtractRoman(RomanToken token, int number, RomanToken subtract) {
+        String prefix = subtract.getRoman();
+        String postFix = composeRoman(token, number - token.getValue() + subtract.getValue());
+        return prefix + token.getRoman() + postFix;
     }
 
     public static String calculate(int number) {
-        return romanComposition(ROMAN_HUNDRED, number);
+        return composeRoman(ROMAN_HUNDRED, number);
     }
 }
