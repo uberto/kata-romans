@@ -1,6 +1,7 @@
 package com.gamasoft.kata;
 
 public class RomanCalculator {
+
     private static final RomanToken ROMAN_EMPTY = new RomanToken("", 0, null, false);
     public static final RomanToken ROMAN_ONE = new RomanToken("I", 1, ROMAN_EMPTY, false);
     public static final RomanToken ROMAN_FIVE = new RomanToken("V", 5, ROMAN_ONE, false);

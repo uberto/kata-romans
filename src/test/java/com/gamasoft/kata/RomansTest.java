@@ -125,5 +125,17 @@ public class RomansTest {
         assertThat(RomanCalculator.calculate(99), is("XCIX"));
     }
 
+    @Test
+    public void threeHundredNinetyNineIsCCCXCIX() {
+
+        assertThat(RomanCalculator.calculate(399), is("CCCXCIX"));
+    }
+
+    @Test
+    public void fiveHundredFourIsDIV() {
+
+        assertThat(RomanCalculator.calculate(504), is("DIV"));
+    }
+
 
 }
