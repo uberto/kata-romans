@@ -6,11 +6,12 @@ public class RomanToken {
     private RomanToken previousToken;
     private RomanToken subtractableToken;
 
-    public RomanToken(String romanToken, int romanTokenValue, RomanToken previousToken, RomanToken subtractableToken) {
+    public RomanToken(String romanToken, int romanTokenValue, RomanToken previousToken, boolean subtractableToken) {
         this.romanToken = romanToken;
         this.romanTokenValue = romanTokenValue;
         this.previousToken = previousToken;
-        this.subtractableToken = subtractableToken;
+
+        this.subtractableToken = subtractableToken ? previousToken.getPrev() : previousToken;
     }
 
     public String getRoman() {
