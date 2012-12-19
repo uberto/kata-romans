@@ -171,8 +171,14 @@ public class RomansTest {
 
     private String romanOnes(int number) {
 
+        String romanToken = ROMAN_ONE;
+        int romanTokenValue = 1;
+        return romanComposition(number, romanToken, romanTokenValue);
+    }
+
+    private String romanComposition(int number, String romanToken, int romanTokenValue) {
         if (number > 0) {
-            return "I" + romanOnes(number - 1);
+            return romanToken + romanComposition(number - romanTokenValue, romanToken, romanTokenValue);
         } else {
             return "";
         }
