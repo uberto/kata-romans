@@ -13,19 +13,19 @@ public class RomanToken {
         this.subtractableToken = subtractableToken;
     }
 
-    public String getRomanToken() {
+    public String getRoman() {
         return romanToken;
     }
 
-    public int getRomanTokenValue() {
+    public int getValue() {
         return romanTokenValue;
     }
 
-    public RomanToken getPreviousToken() {
+    public RomanToken getPrev() {
         return previousToken;
     }
 
-    public RomanToken getSubtractableToken() {
+    public RomanToken getSubtract() {
         return subtractableToken;
     }
 }

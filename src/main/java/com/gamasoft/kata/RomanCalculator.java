@@ -9,17 +9,35 @@ public class RomanCalculator {
     public static final RomanToken ROMAN_HUNDRED = new RomanToken("C", 100, ROMAN_FIFTY, ROMAN_TEN);
 
     private static String romanComposition(RomanToken romanToken, int number) {
-        if (romanToken.getPreviousToken() == null){
-            return romanToken.getRomanToken();
-        } else if (number < romanToken.getRomanTokenValue()- romanToken.getSubtractableToken().getRomanTokenValue()) {
-            return romanComposition(romanToken.getPreviousToken(), number);
+        if (romanToken.getPrev() == null){
+            return romanToken.getRoman();
         } else {
-            return (number < romanToken.getRomanTokenValue() ? romanToken.getSubtractableToken().getRomanToken() : "") + romanToken.getRomanToken() + romanComposition(romanToken, number - romanToken.getRomanTokenValue() + (number < romanToken.getRomanTokenValue() ? romanToken.getSubtractableToken().getRomanTokenValue() : 0));
+            return romanNumber(romanToken, number);
         }
     }
 
-    public static String calculate(int number) {
+    private static String romanNumber(RomanToken romanToken, int number) {
+        int value = romanToken.getValue();
+        RomanToken subtract = romanToken.getSubtract();
 
+        if (number < value - subtract.getValue()) {
+            return romanComposition(romanToken.getPrev(), number);
+        } else {
+            String prefix = onlyIf(number < value, subtract.getRoman());
+            String postFix = romanComposition(romanToken, number - value + onlyIf(number < value, subtract.getValue()));
+            return prefix + romanToken.getRoman() + postFix;
+        }
+    }
+
+    private static int onlyIf(boolean condition, int value) {
+        return condition ? value : 0;
+    }
+
+    private static String onlyIf(boolean condition, String value) {
+        return condition ? value : "";
+    }
+
+    public static String calculate(int number) {
         return romanComposition(ROMAN_HUNDRED, number);
     }
 }
