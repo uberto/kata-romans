@@ -7,12 +7,19 @@ import static org.junit.Assert.assertThat;
 
 public class RomansTest {
 
-    private static final RomanToken ROMAN_EMPTY = new RomanToken("", 0, null);
-    public static final RomanToken ROMAN_ONE = new RomanToken("I", 1, ROMAN_EMPTY);
-    public static final RomanToken ROMAN_FIVE = new RomanToken("V", 5, ROMAN_ONE);
-    private static final String ROMAN_TEN = "X";
+    private static final RomanToken ROMAN_EMPTY = new RomanToken("", 0, null, null);
+    public static final RomanToken ROMAN_ONE = new RomanToken("I", 1, ROMAN_EMPTY, ROMAN_EMPTY);
+    public static final RomanToken ROMAN_FIVE = new RomanToken("V", 5, ROMAN_ONE, ROMAN_ONE);
+    public static final RomanToken ROMAN_TEN = new RomanToken("X", 10, ROMAN_FIVE, ROMAN_ONE);
+//    private static final String ROMAN_TEN = "X";
     private static final String ROMAN_FIFTY = "L";
     private static final String ROMAN_HUNDRED = "C";
+
+
+    @Test
+    public void zeroIsEmptyString() {
+        assertThat(romanCalculator(0), is(""));
+    }
 
     @Test
     public void oneIsI() {
@@ -137,7 +144,7 @@ public class RomansTest {
         if (number < 90) {
             actual = romanAroundFifty(number);
         } else {
-            actual = (number < 100 ? ROMAN_TEN : "") + ROMAN_HUNDRED + romanAroundFifty(number - (number < 100 ? 90 : 100));
+            actual = (number < 100 ? "X" : "") + ROMAN_HUNDRED + romanAroundFifty(number - (number < 100 ? 90 : 100));
         }
         return actual;
     }
@@ -147,39 +154,24 @@ public class RomansTest {
         if (number < 40) {
             actual = romanAroundTen(number);
         } else {
-            actual = (number < 50 ? ROMAN_TEN : "") + ROMAN_FIFTY + romanAroundTen(number - (number < 50 ? 40 : 50));
+            actual = (number < 50 ? "X" : "") + ROMAN_FIFTY + romanAroundTen(number - (number < 50 ? 40 : 50));
         }
         return actual;
     }
 
     private String romanAroundTen(int number) {
-        String actual;
-        if (number < 9) {
-            actual = romanAroundFive(number);
-        } else {
-            actual = romanOnes(10 - number) + ROMAN_TEN + romanCalculator(number - 10);
-        }
-        return actual;
+
+        return romanComposition(ROMAN_TEN, number);
     }
 
-    private String romanAroundFive(int number) {
-
-        return romanComposition(ROMAN_FIVE, number);
-    }
-
-    private String romanOnes(int number) {
-
-        return romanComposition(ROMAN_ONE, number);
-    }
 
     private String romanComposition(RomanToken romanToken, int number) {
-        RomanToken previousToken = romanToken.getPreviousToken();
-        if (previousToken == null){
+        if (romanToken.getPreviousToken() == null){
             return romanToken.getRomanToken();
-        } else if (number < romanToken.getRomanTokenValue()- previousToken.getRomanTokenValue()) {
-            return romanComposition(previousToken, number);
+        } else if (number < romanToken.getRomanTokenValue()- romanToken.getSubtractableToken().getRomanTokenValue()) {
+            return romanComposition(romanToken.getPreviousToken(), number);
         } else {
-            return romanComposition(previousToken, romanToken.getRomanTokenValue() - number) +romanToken.getRomanToken() + romanComposition(romanToken, number - romanToken.getRomanTokenValue());
+            return romanComposition(romanToken.getSubtractableToken(), romanToken.getRomanTokenValue() - number) +romanToken.getRomanToken() + romanComposition(romanToken, number - romanToken.getRomanTokenValue());
         }
     }
 
