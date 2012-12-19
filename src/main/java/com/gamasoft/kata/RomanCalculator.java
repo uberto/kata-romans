@@ -11,13 +11,12 @@ public class RomanCalculator {
 
     private static String composeRoman(RomanToken token, int number) {
 
-        RomanToken subtract = token.getSubtract();
         if (token.getPrev() == null) {
             return token.getRoman();
-        } else if (number < token.getValue() - subtract.getValue()) {
+        } else if (number < token.getSubtractedValue()) {
             return composeRoman(token.getPrev(), number);
         } else if (number < token.getValue()) {
-            return composeSubtractRoman(token, number, subtract);
+            return composeSubtractRoman(token, number);
         } else {
             return composeAdditionRoman(token, number);
         }
@@ -27,8 +26,8 @@ public class RomanCalculator {
         return token.getRoman() + composeRoman(token, number - token.getValue());
     }
 
-    private static String composeSubtractRoman(RomanToken token, int number, RomanToken subtract) {
-        return subtract.getRoman() + token.getRoman() + composeRoman(token, number - token.getValue() + subtract.getValue());
+    private static String composeSubtractRoman(RomanToken token, int number) {
+        return token.getSubtractedRoman() + composeRoman(token, number - token.getSubtractedValue());
     }
 
     public static String calculate(int number) {

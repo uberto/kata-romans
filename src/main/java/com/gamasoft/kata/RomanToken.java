@@ -14,6 +14,14 @@ public class RomanToken {
         this.subtractableToken = subtractableToken ? previousToken.getPrev() : previousToken;
     }
 
+    public String getSubtractedRoman() {
+        return getSubtract().getRoman() + getRoman();
+    }
+
+    public int getSubtractedValue() {
+        return getValue() - getSubtract().getValue();
+    }
+
     public String getRoman() {
         return romanToken;
     }
