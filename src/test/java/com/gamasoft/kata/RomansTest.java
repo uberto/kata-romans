@@ -138,5 +138,12 @@ public class RomansTest {
 
     }
 
+    @Test
+    public void NineteenHundredNineteenIsMCMXIX() {
+
+        assertThat(RomanCalculator.calculate(1919, RomanCalculator.ROMAN_ONE_THOUSAND), is("MCMXIX"));
+
+    }
+
 
 }

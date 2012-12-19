@@ -9,6 +9,7 @@ public class RomanCalculator {
     public static final RomanToken ROMAN_FIFTY = new RomanToken("L", 50, ROMAN_TEN, false);
     public static final RomanToken ROMAN_ONE_HUNDRED = new RomanToken("C", 100, ROMAN_FIFTY, true);
     public static final RomanToken ROMAN_FIVE_HUNDRED = new RomanToken("D", 500, ROMAN_ONE_HUNDRED, false);
+    public static final RomanToken ROMAN_ONE_THOUSAND = new RomanToken("M", 1000, ROMAN_FIVE_HUNDRED, true);
 
 
     private static String composeRoman(RomanToken token, int number) {
