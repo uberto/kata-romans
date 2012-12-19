@@ -11,8 +11,8 @@ public class RomansTest {
     public static final RomanToken ROMAN_ONE = new RomanToken("I", 1, ROMAN_EMPTY, ROMAN_EMPTY);
     public static final RomanToken ROMAN_FIVE = new RomanToken("V", 5, ROMAN_ONE, ROMAN_ONE);
     public static final RomanToken ROMAN_TEN = new RomanToken("X", 10, ROMAN_FIVE, ROMAN_ONE);
-//    private static final String ROMAN_TEN = "X";
-    private static final String ROMAN_FIFTY = "L";
+    public static final RomanToken ROMAN_FIFTY = new RomanToken("L", 50, ROMAN_TEN, ROMAN_TEN);
+//    private static final String ROMAN_FIFTY = "L";
     private static final String ROMAN_HUNDRED = "C";
 
 
@@ -150,18 +150,8 @@ public class RomansTest {
     }
 
     private String romanAroundFifty(int number) {
-        String actual;
-        if (number < 40) {
-            actual = romanAroundTen(number);
-        } else {
-            actual = (number < 50 ? "X" : "") + ROMAN_FIFTY + romanAroundTen(number - (number < 50 ? 40 : 50));
-        }
-        return actual;
-    }
 
-    private String romanAroundTen(int number) {
-
-        return romanComposition(ROMAN_TEN, number);
+        return romanComposition(ROMAN_FIFTY, number);
     }
 
 
