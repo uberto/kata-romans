@@ -7,8 +7,8 @@ import static org.junit.Assert.assertThat;
 
 public class RomansTest {
 
-    public static final String ROMAN_FIVE = "V";
-    public static final String ROMAN_ONE = "I";
+    public static final RomanToken ROMAN_ONE = new RomanToken("I", 1);
+    public static final RomanToken ROMAN_FIVE = new RomanToken("V", 5);
     private static final String ROMAN_TEN = "X";
     private static final String ROMAN_FIFTY = "L";
     private static final String ROMAN_HUNDRED = "C";
@@ -163,24 +163,23 @@ public class RomansTest {
 
     private String romanAroundFive(int number) {
         if (number < 4) {
-            return romanOnes(number);
+            return romanComposition(ROMAN_ONE, number);
         } else {
-            return romanOnes(5 - number) + ROMAN_FIVE + romanOnes(number - 5);
+            return romanComposition(ROMAN_ONE, ROMAN_FIVE.getRomanTokenValue() - number) + ROMAN_FIVE.getRomanToken() + romanComposition(ROMAN_ONE, number - ROMAN_FIVE.getRomanTokenValue());
         }
+
     }
 
     private String romanOnes(int number) {
 
-        String romanToken = ROMAN_ONE;
-        int romanTokenValue = 1;
-        return romanComposition(number, romanToken, romanTokenValue);
+        return romanComposition(ROMAN_ONE, number);
     }
 
-    private String romanComposition(int number, String romanToken, int romanTokenValue) {
-        if (number > 0) {
-            return romanToken + romanComposition(number - romanTokenValue, romanToken, romanTokenValue);
-        } else {
+    private String romanComposition(RomanToken romanToken, int number) {
+        if (number < romanToken.getRomanTokenValue()) {
             return "";
+        } else {
+            return romanToken.getRomanToken() + romanComposition(romanToken, number - romanToken.getRomanTokenValue());
         }
     }
 
