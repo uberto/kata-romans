@@ -134,7 +134,8 @@ public class RomansTest {
     @Test
     public void fiveHundredFourIsDIV() {
 
-        assertThat(RomanCalculator.calculate(504), is("DIV"));
+        assertThat(RomanCalculator.calculate(504, RomanCalculator.ROMAN_FIVE_HUNDRED), is("DIV"));
+
     }
 
 

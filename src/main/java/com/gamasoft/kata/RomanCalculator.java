@@ -7,7 +7,8 @@ public class RomanCalculator {
     public static final RomanToken ROMAN_FIVE = new RomanToken("V", 5, ROMAN_ONE, false);
     public static final RomanToken ROMAN_TEN = new RomanToken("X", 10, ROMAN_FIVE, true);
     public static final RomanToken ROMAN_FIFTY = new RomanToken("L", 50, ROMAN_TEN, false);
-    public static final RomanToken ROMAN_HUNDRED = new RomanToken("C", 100, ROMAN_FIFTY, true);
+    public static final RomanToken ROMAN_ONE_HUNDRED = new RomanToken("C", 100, ROMAN_FIFTY, true);
+    public static final RomanToken ROMAN_FIVE_HUNDRED = new RomanToken("D", 500, ROMAN_ONE_HUNDRED, false);
 
 
     private static String composeRoman(RomanToken token, int number) {
@@ -32,6 +33,11 @@ public class RomanCalculator {
     }
 
     public static String calculate(int number) {
-        return composeRoman(ROMAN_HUNDRED, number);
+        return composeRoman(ROMAN_ONE_HUNDRED, number);
     }
+
+    public static String calculate(int number, RomanToken romanToken) {
+        return composeRoman(romanToken, number);
+    }
+
 }
