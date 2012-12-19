@@ -7,162 +7,123 @@ import static org.junit.Assert.assertThat;
 
 public class RomansTest {
 
-    private static final RomanToken ROMAN_EMPTY = new RomanToken("", 0, null, null);
-    public static final RomanToken ROMAN_ONE = new RomanToken("I", 1, ROMAN_EMPTY, ROMAN_EMPTY);
-    public static final RomanToken ROMAN_FIVE = new RomanToken("V", 5, ROMAN_ONE, ROMAN_ONE);
-    public static final RomanToken ROMAN_TEN = new RomanToken("X", 10, ROMAN_FIVE, ROMAN_ONE);
-    public static final RomanToken ROMAN_FIFTY = new RomanToken("L", 50, ROMAN_TEN, ROMAN_TEN);
-//    private static final String ROMAN_FIFTY = "L";
-    private static final String ROMAN_HUNDRED = "C";
-
 
     @Test
     public void zeroIsEmptyString() {
-        assertThat(romanCalculator(0), is(""));
+        assertThat(RomanCalculator.calculate(0), is(""));
     }
 
     @Test
     public void oneIsI() {
-        assertThat(romanCalculator(1), is("I"));
+        assertThat(RomanCalculator.calculate(1), is("I"));
     }
 
     @Test
     public void twoIsII() {
-        assertThat(romanCalculator(2), is("II"));
+        assertThat(RomanCalculator.calculate(2), is("II"));
     }
 
     @Test
     public void threeIsIII() {
-        assertThat(romanCalculator(3), is("III"));
+        assertThat(RomanCalculator.calculate(3), is("III"));
     }
 
     @Test
     public void fourIsIV() {
 
-        assertThat(romanCalculator(4), is("IV"));
+        assertThat(RomanCalculator.calculate(4), is("IV"));
     }
 
     @Test
     public void fiveIsV() {
 
-        assertThat(romanCalculator(5), is("V"));
+        assertThat(RomanCalculator.calculate(5), is("V"));
     }
 
     @Test
     public void sixIsVI() {
 
-        assertThat(romanCalculator(6), is("VI"));
+        assertThat(RomanCalculator.calculate(6), is("VI"));
     }
 
     @Test
     public void sevenIsVII() {
 
-        assertThat(romanCalculator(7), is("VII"));
+        assertThat(RomanCalculator.calculate(7), is("VII"));
     }
 
     @Test
     public void eightIsVIII() {
 
-        assertThat(romanCalculator(8), is("VIII"));
+        assertThat(RomanCalculator.calculate(8), is("VIII"));
     }
 
     @Test
     public void nineIsIX() {
 
-        assertThat(romanCalculator(9), is("IX"));
+        assertThat(RomanCalculator.calculate(9), is("IX"));
     }
 
     @Test
     public void tenIsX() {
 
-        assertThat(romanCalculator(10), is("X"));
+        assertThat(RomanCalculator.calculate(10), is("X"));
     }
 
     @Test
     public void twelveIsXII() {
 
-        assertThat(romanCalculator(12), is("XII"));
+        assertThat(RomanCalculator.calculate(12), is("XII"));
     }
 
     @Test
     public void fourteenIsXIV() {
-        assertThat(romanCalculator(14), is("XIV"));
+        assertThat(RomanCalculator.calculate(14), is("XIV"));
     }
 
     @Test
     public void eighteenIsXVIII() {
-        assertThat(romanCalculator(18), is("XVIII"));
+        assertThat(RomanCalculator.calculate(18), is("XVIII"));
     }
 
     @Test
     public void nineteenIsXIX() {
 
-        assertThat(romanCalculator(19), is("XIX"));
+        assertThat(RomanCalculator.calculate(19), is("XIX"));
     }
 
     @Test
     public void twentyNineIsXXIX() {
-        assertThat(romanCalculator(29), is("XXIX"));
+        assertThat(RomanCalculator.calculate(29), is("XXIX"));
     }
 
     @Test
     public void thirtySixIsXXXVI() {
-        assertThat(romanCalculator(36), is("XXXVI"));
+        assertThat(RomanCalculator.calculate(36), is("XXXVI"));
     }
 
     @Test
     public void fortyIsXL() {
-        assertThat(romanCalculator(40), is("XL"));
+        assertThat(RomanCalculator.calculate(40), is("XL"));
     }
 
     @Test
     public void fiftyFourIsLIV() {
 
-        assertThat(romanCalculator(54), is("LIV"));
+        assertThat(RomanCalculator.calculate(54), is("LIV"));
     }
 
     @Test
     public void sixtyNineIsLXIX() {
 
-        assertThat(romanCalculator(69), is("LXIX"));
+        assertThat(RomanCalculator.calculate(69), is("LXIX"));
     }
 
     @Test
     public void ninetyNineIsXCIX() {
 
-        assertThat(romanCalculator(99), is("XCIX"));
+        assertThat(RomanCalculator.calculate(99), is("XCIX"));
     }
 
-    private String romanCalculator(int number) {
-
-        return romansAroundOneHundred(number);
-    }
-
-
-    private String romansAroundOneHundred(int number) {
-        String actual;
-        if (number < 90) {
-            actual = romanAroundFifty(number);
-        } else {
-            actual = (number < 100 ? "X" : "") + ROMAN_HUNDRED + romanAroundFifty(number - (number < 100 ? 90 : 100));
-        }
-        return actual;
-    }
-
-    private String romanAroundFifty(int number) {
-
-        return romanComposition(ROMAN_FIFTY, number);
-    }
-
-
-    private String romanComposition(RomanToken romanToken, int number) {
-        if (romanToken.getPreviousToken() == null){
-            return romanToken.getRomanToken();
-        } else if (number < romanToken.getRomanTokenValue()- romanToken.getSubtractableToken().getRomanTokenValue()) {
-            return romanComposition(romanToken.getPreviousToken(), number);
-        } else {
-            return romanComposition(romanToken.getSubtractableToken(), romanToken.getRomanTokenValue() - number) +romanToken.getRomanToken() + romanComposition(romanToken, number - romanToken.getRomanTokenValue());
-        }
-    }
 
 }
