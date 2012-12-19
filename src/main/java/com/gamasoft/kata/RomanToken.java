@@ -3,10 +3,12 @@ package com.gamasoft.kata;
 public class RomanToken {
     private final String romanToken;
     private final int romanTokenValue;
+    private RomanToken previousToken;
 
-    public RomanToken(String romanToken, int romanTokenValue) {
+    public RomanToken(String romanToken, int romanTokenValue, RomanToken previousToken) {
         this.romanToken = romanToken;
         this.romanTokenValue = romanTokenValue;
+        this.previousToken = previousToken;
     }
 
     public String getRomanToken() {
@@ -15,5 +17,9 @@ public class RomanToken {
 
     public int getRomanTokenValue() {
         return romanTokenValue;
+    }
+
+    public RomanToken getPreviousToken() {
+        return previousToken;
     }
 }
