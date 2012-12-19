@@ -121,23 +121,24 @@ public class RomansTest {
 
     @Test
     public void ninetyNineIsXCIX() {
-        String actual;
-        int number = 99;
-        if (number < 90) {
-            actual = romanAroundFifty(number);
-        } else {
-            actual = (number < 100? ROMAN_TEN : "") + ROMAN_HUNDRED + romanAroundFifty(number - (number < 100? 90 : 100));
-        }
 
-        assertThat(actual, is("XCIX"));
+        assertThat(romanCalculator(99), is("XCIX"));
     }
-
-
-
 
     private String romanCalculator(int number) {
 
-        return romanAroundFifty(number);
+        return romansAroundOneHundred(number);
+    }
+
+
+    private String romansAroundOneHundred(int number) {
+        String actual;
+        if (number < 90) {
+            actual = romanAroundFifty(number);
+        } else {
+            actual = (number < 100 ? ROMAN_TEN : "") + ROMAN_HUNDRED + romanAroundFifty(number - (number < 100 ? 90 : 100));
+        }
+        return actual;
     }
 
     private String romanAroundFifty(int number) {
@@ -145,7 +146,7 @@ public class RomansTest {
         if (number < 40) {
             actual = romanAroundTen(number);
         } else {
-            actual = (number < 50? ROMAN_TEN : "") + ROMAN_FIFTY + romanAroundTen(number - (number < 50? 40 : 50));
+            actual = (number < 50 ? ROMAN_TEN : "") + ROMAN_FIFTY + romanAroundTen(number - (number < 50 ? 40 : 50));
         }
         return actual;
     }
@@ -170,11 +171,11 @@ public class RomansTest {
 
     private String romanOnes(int number) {
 
-        StringBuilder sb = new StringBuilder("");
-        for (int i = 0; i < number; i++) {
-            sb.append(ROMAN_ONE);
+        if (number > 0) {
+            return "I" + romanOnes(number - 1);
+        } else {
+            return "";
         }
-        return sb.toString();
     }
 
 }
