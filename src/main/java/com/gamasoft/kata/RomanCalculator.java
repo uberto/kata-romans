@@ -34,11 +34,8 @@ public class RomanCalculator {
     }
 
     public static String calculate(int number) {
-        return composeRoman(ROMAN_ONE_HUNDRED, number);
+        return composeRoman(ROMAN_ONE_THOUSAND, number);
     }
 
-    public static String calculate(int number, RomanToken romanToken) {
-        return composeRoman(romanToken, number);
-    }
 
 }
